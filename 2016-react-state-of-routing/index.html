@@ -36,7 +36,7 @@
 				<section>
                     <h3>Andrii Malaman</h3>
                     <ul>
-                        <li>Frontend Developer at About You GmbH</li>
+                        <li>Frontend Developer</li>
                         <li>Work with react for last 2 years </li>
                         <li>Work with react-native for last 6 month </li>
                         <li>Github: <a href="https://github.com/malaman">https://github.com/malaman</a>
@@ -155,6 +155,7 @@
                     <section>
                         <h3>Some react-router facts</h3>
                         <ul>
+                            <li>Originally inspired by the Ember router</li>
                             <li>Three major versions under active development simultaneously</li>
                             <li>8 releases with breaking changes during last 2 years </li>
                         </ul>
@@ -177,7 +178,6 @@
                         <h3>react-router v2</h3>
                         <ul>
                             <li>The most popular routing library for react</li>
-                            <li>Inspired by the Ember router</li>
                             <li>UI routing (route to component matching)</li>
                             <li>Route hooks (onEnter, onChange, onLeave)</li>
                             <li>Central routing configuration is possible</li>
@@ -205,18 +205,156 @@
                 <!-- Slide End -->
                 <!-- Slide Start -->
                 <section>
-                    <h3>react-router v4</h3>
-                    <ul>
-                        <li>Start of development: June 2016</li>
-                        <li>Complete rewrite</li>
-                        <li>Current release: v4.0.0-alpha.5</li>
-                        <li>No hooks</li>
-                        <li>Central routing configuration is not possible out of the box</li>
-                    </ul>
+                    <section>
+                        <h3>react-router v4</h3>
+                        <ul>
+                            <li>Start of development: June 2016</li>
+                            <li>Complete rewrite</li>
+                            <li>Current release: v4.0.0-alpha.5</li>
+                            <li>Should work with react-native</li>
+                            <li>No route hooks</li>
+                            <li>No central route config</li>
+                        </ul>
+                    </section>
+                    <section>
+                        <h3>Principles</h3>
+                        <ul>
+                            <li>Everything is react component</li>
+                            <li> location prop is similar to window.location</li>
+                            <li> Match component turns a location into UI</li>
+                        </ul>
+                    </section>
+                    <section data-markdown>
+                        <script type="text/template">
+                            ```javascript
+                            import { BrowserRouter, Match, Link } from 'react-router'
+
+                            const App = () => (
+                              <BrowserRouter>
+                                  <div>
+                                      <ul>
+                                          <li><Link to="/">Home</Link></li>
+                                          <li><Link to="/:id">Dynamic</Link></li>
+                                      </ul>
+                                      <Match exactly pattern="/" component={Home} />
+                                    <  Match pattern="/:id" component={Child} />
+                                  </div>
+                              </BrowserRouter>
+                            );
+                            ```
+                        </script>
+                    </section>
+                    <section>
+                        <h3>Component props</h3>
+                        <ul>
+                            <li>location - {hash, pathname, query, search, state} </li>
+                            <li>pathname - current pathname </li>
+                            <li>pattern - match pattern</li>
+                        </ul>
+                    </section>
+                    <section>
+                        <h3>Route hooks</h3>
+                        <ul>
+                            <li>onEnter = componentWillMount</li>
+                            <li>onChange = componentWillReceiveProps</li>
+                            <li>onChange = componentWillUnmount</li>
+                        </ul>
+                    </section>
+                    <section>
+                        <h3>Central route config</h3>
+                        <ul>
+                            <li>No implementation out of the box</li>
+                            <li>Options: </li>
+                            <ul>
+                                <li>Use React components view hierarchy</li>
+                                <li><a href="https://github.com/ReactTraining/react-router-addons-routes">react-router-addons-routes</a></li>
+                            </ul>
+                        </ul>
+                    </section>
+                    <section>
+                        <h3>react-router-addons-routes</h3>
+                        <img src="img/route-config-help.png"/>
+                        <small><a href="https://github.com/ReactTraining/react-router-addons-routes">https://github.com/ReactTraining/react-router-addons-routes</a></small>
+
+                    </section>
+                    <section>
+                        <h3>Integration with redux</h3>
+                        <ul>
+                            <li><a href="https://github.com/reactjs/react-router-redux">react-router-redux v5</a></li>
+                            <li><a href="https://github.com/ReactTraining/react-router-addons-controlled">react-router-addons-controlled</a></li>
+                        </ul>
+                    </section>
+                    <section data-markdown>
+                        <script type="text/template">
+                            ```javascript
+                            import {ControlledBrowserRouter} from 'react-router-addons-controlled';
+
+                            const App = (props) => (
+                              <ControlledBrowserRouter
+                                 history={history}
+                                 location={props.location}
+                                 action={props.action}
+                                 onChange={(location, action) => {
+                                   if (action === 'SYNC') {
+                                      this.props.dispatch({
+                                      type: NAVIGATE,
+                                      location,
+                                      action: props.action
+                                   });
+                                 })}
+                                />
+                            );
+                            ```
+                        </script>
+                    </section>
+                    <section>
+                        <h3>Programatically navigation</h3>
+                        <ul>
+                            <li>Try to avoid it</li>
+                            <li>Use Link component instead</li>
+                            <li>If necessary use context injection</li>
+                        </ul>
+                    </section>
+                    <section data-markdown>
+                        <script type="text/template">
+                            ```javascript
+                            class ReactComponent extends Component {
+                              static contextTypes = {
+                                router: PropTypes.object.isRequired
+                              };
+
+                              componentWillMount() {
+                                if (this.props.location.pathname === '/') {
+                                  this.context.router.transitionTo('/user');
+                                }
+
+                              render() {
+                                ...
+                              }
+                            }
+                            ```
+                        </script>
+                    </section>
+                    <section>
+                        <h3>Migration from v2/v3</h3>
+                        <img src="img/react_router_migration.jpg" height="400"/>
+                        <div>
+                            <ul>
+                                <li>Use both version simultaneously</li>
+                                <li>Step by step migration</li>
+                            </ul>
+                        </div>
+                    </section>
+                </section>
+                <!-- Slide End -->
+                <!-- Slide Start -->
+                <section>
+                    <img src="img/questions.jpg" />
+                    <a href="https://malaman.github.io/talks/2016-react-state-of-routing">https://malaman.github.io/talks/2016-react-state-of-routing</a>
+
                 </section>
                 <!-- Slide End -->
 
-			</div>
 		</div>
 
 		<script src="lib/js/head.min.js"></script>
