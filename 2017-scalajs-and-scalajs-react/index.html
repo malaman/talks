@@ -61,6 +61,7 @@
                 </section>
                 <!-- Slide end-->
 
+                <!-- Slide Start -->
                 <section data-markdown>
 
                     <script type="text/template">
@@ -149,13 +150,109 @@
 
                 <!-- Slide Start -->
                 <section>
+                    <h3>What JS need to match Scala.js build-ins</h3>
+                    <ul>
+                        <li>ES6</li>
+                        <li>TypeScript</li>
+                        <li>Immutable.js</li>
+                        <li>Rambda</li>
+                    </ul>
+                </section>
+                <!-- Slide end-->
+
+                <!-- Slide Start -->
+                <section>
                     <h3>Scala.js features</h3>
                     <ul>
                         <li>Scala code compiled to JS</li>
                         <li>Full* support of Scala language</li>
+                        <li>High performance</li>
                         <li>Reasonable JS bundle size</li>
                         <li>JS interoperability</li>
+                        <li>Reach ecosystem</li>
                         <li>SBT support</li>
+                    </ul>
+                </section>
+                <!-- Slide end-->
+
+                <!-- Slide Start -->
+                <section>
+                    <h3>Scala.js limitations</h3>
+                    <ul>
+                        <li>Reflection is not supported</li>
+                        <li>Enumerations.Value() method is not supported</li>
+                        <li>Await is not supported</li>
+                        <li>Regular expression works as JS regular expressions</li>
+                        <li>Heavy scala.Symbol usage could cause memory leaks</li>
+                    </ul>
+                </section>
+                <!-- Slide end-->
+
+
+
+                <!-- Slide Start -->
+                <section>
+                    <h3>Performance</h3>
+                    <img style="height:450px" src="img/benchmark.png" />
+                </section>
+                <!-- Slide end-->
+
+                <!-- Slide Start -->
+                <section>
+                    <section>
+                        <h3>jsfiddle.net bundle size</h3>
+                        <img src="img/jsfiddle.png" />
+                    </section>
+                    <section>
+                        <h3>scalafiddle.io bundle size</h3>
+                        <img src="img/scalafiddle.png" />
+                    </section>
+                </section>
+                <!-- Slide end-->
+
+
+                <!-- Slide Start -->
+                <section data-markdown>
+
+                    <script type="text/template">
+                        ```
+                        import scala.scalajs.js
+                        import org.scalajs.dom
+
+                        object ScalaJSExample extends js.JSApp {
+                          def main(): Unit = {
+                            val root = dom.document.getElementById("playground")
+                            val paragraph = dom.document.createElement("p")
+                            val btn = dom.document.createElement("button")
+                              .asInstanceOf[dom.html.Button]
+                            var counter: Int = 0
+
+                            paragraph.innerHTML = s"<strong>Count: $counter</strong>"
+                            btn.innerHTML = "Click Me!"
+
+                            btn.onclick = {e: dom.MouseEvent =>
+                              counter += 1
+                              paragraph.innerHTML = s"<strong>Count: $counter</strong>"
+                              js.Dynamic.global.console.log("counter: ", counter)
+                            }
+
+                            root.appendChild(paragraph)
+                            root.appendChild(btn)
+                          }
+                        }
+                        ```
+                    </script>
+                </section>
+                <!-- Slide end-->
+
+
+                <!-- Slide Start -->
+                <section>
+                    <h3>Ecosystem</h3>
+                    <ul>
+                        <li>
+                            <a href="https://github.com/typelevel/cats">cats</a>
+                        </li>
                     </ul>
                 </section>
                 <!-- Slide end-->
