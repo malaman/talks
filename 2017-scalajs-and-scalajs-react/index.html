@@ -71,7 +71,10 @@
                         [1,5,42,2].map(parseInt);
                         > [1, NaN, NaN, 2]
 
-                        [1,5,42,2].sort();
+                        var a = [1,5,42,2];
+                        a.sort();
+                        > [1, 2, 42, 5]
+                        a
                         > [1, 2, 42, 5]
 
                         ```
@@ -210,6 +213,88 @@
                 </section>
                 <!-- Slide end-->
 
+                <!-- Slide Start -->
+                <section>
+                    <section data-markdown>
+                        <script type="text/template">
+                            ## Interop
+
+                            ```javascript
+                            window.CustomJSON = {
+                              parse(value) {
+                                try {
+                                  return JSON.parse(value);
+                                }
+                                catch (e) {
+                                  return;
+                                }
+                              },
+                              stringify(value) {
+                                  return JSON.stringify(value);
+                              }
+                            }
+                            ```
+                        </script>
+                    </section>
+                    <section data-markdown>
+                        <script type="text/template">
+                            ```
+                            import scala.scalajs.js
+                            import scala.scalajs.js.annotation.JSGlobal
+                            import js.Dynamic.{global => g}
+
+                            object ScalaJSExample extends js.JSApp {
+                              @js.native
+                              @JSGlobal("CustomJSON")
+                              object CustomJSON extends js.Object {
+                                def parse(x: String): js.UndefOr[js.Object]= js.native
+                                def stringify(x: js.Dynamic): js.UndefOr[String]  = js.native
+                              }
+
+                              def main(): Unit = {
+                                val x = CustomJSON.parse("{\"a\": 1}")
+                                if (x.isDefined) {
+                                  g.console.log("x: ", x)
+                                }
+
+                                val toStringify = js.Dynamic
+                                  .literal("name" -> "John", "surname" -> "Doe")
+                                val y  = CustomJSON.stringify(toStringify)
+                                g.console.log("y: ", y)
+                              }
+                            }
+                            ```
+                        </script>
+                    </section>
+                </section>
+                <!-- Slide end-->
+
+				<!-- Slide Start -->
+                <section>
+                    <h3>Ecosystem</h3>
+                    <ul>
+                        <li>
+                            <a href="https://github.com/typelevel/cats">cats</a>, <a href="https://github.com/scalaz/scalaz">scalaz</a>, <a href="https://github.com/julien-truffaut/Monocle">Monocle</a> - functional programming
+                        </li>
+						<li>
+							<a href="https://github.com/monix/monix">Monix</a> - reactive programming
+						</li>
+						<li>
+							<a href="https://github.com/circe/circe">circe</a> - JSON operations
+						</li>
+						<li>
+							<a href="https://github.com/adamw/macwire">MacWire</a> - Dependency Injection
+						</li>
+						<li>
+							<a href="https://github.com/akka-js/akka.js">akka.js</a>
+						</li>
+						<li>
+							<a href="http://www.scalatest.org/">ScalaTest</a>
+						</li>
+                    </ul>
+                </section>
+                <!-- Slide end-->
+
 
                 <!-- Slide Start -->
                 <section data-markdown>
@@ -244,19 +329,6 @@
                     </script>
                 </section>
                 <!-- Slide end-->
-
-
-                <!-- Slide Start -->
-                <section>
-                    <h3>Ecosystem</h3>
-                    <ul>
-                        <li>
-                            <a href="https://github.com/typelevel/cats">cats</a>
-                        </li>
-                    </ul>
-                </section>
-                <!-- Slide end-->
-
 
                 <!-- Slide Start -->
                 <section>
