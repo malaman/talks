@@ -213,69 +213,13 @@
                 </section>
                 <!-- Slide end-->
 
-                <!-- Slide Start -->
-                <section>
-                    <section data-markdown>
-                        <script type="text/template">
-                            ## Interop
-
-                            ```javascript
-                            window.CustomJSON = {
-                              parse(value) {
-                                try {
-                                  return JSON.parse(value);
-                                }
-                                catch (e) {
-                                  return;
-                                }
-                              },
-                              stringify(value) {
-                                  return JSON.stringify(value);
-                              }
-                            }
-                            ```
-                        </script>
-                    </section>
-                    <section data-markdown>
-                        <script type="text/template">
-                            ```
-                            import scala.scalajs.js
-                            import scala.scalajs.js.annotation.JSGlobal
-                            import js.Dynamic.{global => g}
-
-                            object ScalaJSExample extends js.JSApp {
-                              @js.native
-                              @JSGlobal("CustomJSON")
-                              object CustomJSON extends js.Object {
-                                def parse(x: String): js.UndefOr[js.Object]= js.native
-                                def stringify(x: js.Dynamic): js.UndefOr[String]  = js.native
-                              }
-
-                              def main(): Unit = {
-                                val x = CustomJSON.parse("{\"a\": 1}")
-                                if (x.isDefined) {
-                                  g.console.log("x: ", x)
-                                }
-
-                                val toStringify = js.Dynamic
-                                  .literal("name" -> "John", "surname" -> "Doe")
-                                val y  = CustomJSON.stringify(toStringify)
-                                g.console.log("y: ", y)
-                              }
-                            }
-                            ```
-                        </script>
-                    </section>
-                </section>
-                <!-- Slide end-->
-
 				<!-- Slide Start -->
-                <section>
-                    <h3>Ecosystem</h3>
-                    <ul>
-                        <li>
-                            <a href="https://github.com/typelevel/cats">cats</a>, <a href="https://github.com/scalaz/scalaz">scalaz</a>, <a href="https://github.com/julien-truffaut/Monocle">Monocle</a> - functional programming
-                        </li>
+				<section>
+					<h3>Ecosystem - Ported packages</h3>
+					<ul>
+						<li>
+							<a href="https://github.com/typelevel/cats">cats</a>, <a href="https://github.com/scalaz/scalaz">scalaz</a>, <a href="https://github.com/julien-truffaut/Monocle">Monocle</a> - functional programming
+						</li>
 						<li>
 							<a href="https://github.com/monix/monix">Monix</a> - reactive programming
 						</li>
@@ -291,10 +235,9 @@
 						<li>
 							<a href="http://www.scalatest.org/">ScalaTest</a>
 						</li>
-                    </ul>
-                </section>
-                <!-- Slide end-->
-
+					</ul>
+				</section>
+				<!-- Slide end-->
 
                 <!-- Slide Start -->
                 <section data-markdown>
@@ -329,6 +272,140 @@
                     </script>
                 </section>
                 <!-- Slide end-->
+
+				<!-- Slide Start -->
+				<section>
+					<section data-markdown>
+						<script type="text/template">
+							## Interop
+
+							```javascript
+							window.CustomJSON = {
+							  parse(value) {
+								try {
+								  return JSON.parse(value);
+								}
+								catch (e) {
+								  return;
+								}
+							  },
+							  stringify(value) {
+								  return JSON.stringify(value);
+							  }
+							}
+							```
+						</script>
+					</section>
+					<section data-markdown>
+						<script type="text/template">
+							```
+							import scala.scalajs.js
+							import scala.scalajs.js.annotation.JSGlobal
+							import js.Dynamic.{global => g}
+
+							object ScalaJSExample extends js.JSApp {
+							  @js.native
+							  @JSGlobal("CustomJSON")
+							  object CustomJSON extends js.Object {
+								def parse(x: String): js.UndefOr[js.Object]= js.native
+								def stringify(x: js.Dynamic): js.UndefOr[String]  = js.native
+							  }
+
+							  def main(): Unit = {
+								val x = CustomJSON.parse("{\"a\": 1}")
+								if (x.isDefined) {
+								  g.console.log("x: ", x)
+								}
+
+								val toStringify = js.Dynamic
+								  .literal("name" -> "John", "surname" -> "Doe")
+								val y  = CustomJSON.stringify(toStringify)
+								g.console.log("y: ", y)
+							  }
+							}
+							```
+						</script>
+					</section>
+				</section>
+				<!-- Slide end-->
+
+				<!-- Slide Start -->
+				<section>
+					<h3>Ecosystem - JS Facades</h3>
+					<ul>
+						<li>
+							Facades are similar to TypeScript type definitions
+						</li>
+						<li>
+							<a href="https://definitelyscala.com/">https://definitelyscala.com/</a> - repository of OSS facades
+						</li>
+						<li>
+							~700 facades are published on <a href="https://definitelyscala.com/">https://definitelyscala.com/</a>
+						</li>
+						<li>
+							jquery, angularjs, angular2, react, vue facades are available
+						</li>
+					</ul>
+				</section>
+				<!-- Slide end-->
+
+				<!-- Slide Start -->
+				<section>
+					<h3>Ecosystem - Scala.js libraries</h3>
+					<ul>
+						<li>
+							<a href="http://www.lihaoyi.com/scalatags">scalatags</a>
+						</li>
+						<li>
+							<a href="https://github.com/japgolly/scalajs-react">scalajs-react</a>
+						</li>
+						<li>
+							<a href="http://udash.io/">Udash</a>
+						</li>
+						<li>
+							<a href="https://github.com/ThoughtWorksInc/Binding.scala">Binding.scala</a>
+						</li>
+						<li>
+							<a href="https://github.com/shadaj/slinky">Slinky</a>
+						</li>
+					</ul>
+				</section>
+				<!-- Slide end-->
+
+
+				<!-- Slide Start -->
+				<section>
+					<img style="height:450px" src="img/scalajs_frameworks.png" />
+				</section>
+				<!-- Slide end-->
+
+				<!-- Slide Start -->
+				<section>
+					<h3>Frontend App tools</h3>
+					<ul>
+						<li>
+							Rendering helper
+						</li>
+						<li>
+							UI events handler
+						</li>
+						<li>
+							Ajax/Websocket client
+						</li>
+						<li>
+							Data management helper
+						</li>
+						<li>
+							Router
+						</li>
+						<li>
+							Assets bundler
+						</li>
+					</ul>
+				</section>
+				<!-- Slide end-->
+
+
 
                 <!-- Slide Start -->
                 <section>
