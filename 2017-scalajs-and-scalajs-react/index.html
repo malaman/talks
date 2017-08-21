@@ -63,7 +63,6 @@
 
                 <!-- Slide Start -->
                 <section data-markdown>
-
                     <script type="text/template">
                         ## JS Problems
 
@@ -148,7 +147,6 @@
                         </tbody>
                     </table>
                 </section>
-
                 <!-- Slide end-->
 
                 <!-- Slide Start -->
@@ -399,9 +397,226 @@
 							Router
 						</li>
 						<li>
+							Styling
+						</li>
+						<li>
 							Assets bundler
 						</li>
 					</ul>
+				</section>
+				<!-- Slide end-->
+
+				<!-- Slide Start -->
+                <section>
+                    <table>
+                        <thead>
+                            <tr>
+                                <th>Task</th>
+                                <th>Solution</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <th>Rendering helper</th>
+                                <th>
+									<a href="https://github.com/japgolly/scalajs-react">scalajs-react</a>
+								</th>
+                            </tr>
+							<tr>
+                                <th>UI events handler</th>
+                                <th>
+									<a href="https://github.com/japgolly/scalajs-react">scalajs-react</a>
+								</th>
+                            </tr>
+							<tr>
+                                <th>Ajax/Websocket client</th>
+                                <th>
+									<a href="https://github.com/scala-js/scala-js-dom">scala-js-dom</a>
+								</th>
+                            </tr>
+							<tr>
+                                <th>Data management helper</th>
+                                <th>
+									<a href="https://github.com/suzaku-io/diode">diode</a>
+								</th>
+                            </tr>
+							<tr>
+								<th>Router</th>
+								<th>
+									<a href="https://github.com/japgolly/scalajs-react">scalajs-react</a>
+								</th>
+							</tr>
+							<tr>
+								<th>Styling</th>
+								<th>
+									Inline-styles/SCSS
+								</th>
+							</tr>
+							<tr>
+								<th>Assets bundler</th>
+								<th>
+									<a href="https://github.com/webpack/webpack">webpack</a>
+								</th>
+							</tr>
+
+                        </tbody>
+                    </table>
+                </section>
+                <!-- Slide end-->
+
+				<!-- Slide Start -->
+				<section>
+					<h3>scalajs-react</h3>
+					<ul>
+						<li>
+							Type safe wrapper arround React.js library
+						</li>
+						<li>
+							Router as extra package
+						</li>
+						<li>
+							Integration with cats, scalaz, monocle
+						</li>
+						<li>
+							Test helpers
+						</li>
+					</ul>
+				</section>
+				<!-- Slide end-->
+
+				<!-- Slide Start -->
+				<section data-markdown>
+					<script type="text/template">
+						```
+						import japgolly.scalajs.react._
+						import japgolly.scalajs.react.vdom.html_<^._
+
+						object Counter {
+						  case class State(count: Int)
+
+						  class Backend(bs: BackendScope[Unit, State]) {
+
+						    def handleClick(): Callback = bs
+							.modState(s => s.copy(count = s.count + 1))
+
+						    def render(props: Unit, state: State): VdomElement =
+						      <.div(
+						        <.p(s"Count: ${state.count}"),
+						        <.button(^.onClick --> handleClick, "Click me")
+						      )
+						    }
+
+						  val Component = ScalaComponent.builder[Unit]("Counter")
+						    .initialState(State(0))
+						    .renderBackend[Backend].build
+						}
+						```
+					</script>
+				</section>
+				<!-- Slide end-->
+
+				<!-- Slide Start -->
+				<section>
+					<h3>Callback class</h3>
+					<ul>
+						<li>
+							Encapsulates logic and side-effects
+						</li>
+						<li>
+							DOM, UI, IO actions should be wrapped with callback
+						</li>
+						<li>
+							Provides a set of utilities (.map, .log, .when/.unless)
+						</li>
+						<li>
+							 Allows composition with another callbacks (flatMap, >> operator)
+						</li>
+					</ul>
+				</section>
+				<!-- Slide end-->
+
+
+				<!-- Slide Start -->
+				<section data-markdown>
+					<script type="text/template">
+						```
+						object GoogleMaps {
+
+						  @JSImport("google-map-react", JSImport.Default)
+						  @js.native
+						  object JsComp extends js.Any
+
+						  @ScalaJSDefined
+						  trait Props extends js.Object {
+						    val bootstrapURLKeys: js.Object
+						    val center: js.Array[Double]
+						  }
+
+						  val Component = JsFnComponent[Props, None](JsComp)
+
+						  def props(lat: Double, lng: Double, zoom: Int): Props =
+						    new Props {
+						      val bootstrapURLKeys  = js.Dynamic.literal(key="secret")
+						      val center = js.Array(lat, lng)
+						    }
+
+						  def apply(lat: Double, lng: Double) = Component(props(lat, lng))()
+						}
+						```
+					</script>
+				</section>
+				<!-- Slide end-->
+
+				<!-- Slide Start -->
+				<section>
+					<h3>scalajs-react router</h3>
+					<ul>
+						<li>
+							Static, Dynamic routes
+						</li>
+						<li>
+							Nested routes
+						</li>
+						<li>
+							SPA Link component
+						</li>
+						<li>
+							 Conditional routes
+						</li>
+					</ul>
+				</section>
+				<!-- Slide end-->
+
+
+				<!-- Slide Start -->
+				<section data-markdown>
+					<script type="text/template">
+						```
+						import japgolly.scalajs.react.extra.router._
+
+						object AppRouter {
+						  sealed trait Page
+						  case object HomeRoute extends Page
+						  case class SomeRoute(name: String, id: Int) extends Page
+
+						  val routerConfig = RouterConfigDsl[Page].buildConfig { dsl =>
+						    import dsl._
+						    (trimSlashes
+						      | staticRoute(root, HomeRoute) ~> renderR(renderHomePage)
+						      | dynamicRouteCT(("some" / string(".*") / int)
+							  	.caseClass[SomeRoute]) ~> dynRenderR(renderSomePage)
+						    )
+						      .notFound(redirectToPage(HomeRoute)(Redirect.Replace))
+						  }
+
+						  def renderHomePage(ctl: RouterCtl[Page]) =
+						    HomePage.Component(HomePage.Props(ctl)))
+
+						  def renderSomePage(p: SomeRoute, ctl: RouterCtl[Page]) =
+						    SomePage.Component(SomePage.Props(p.id, p.name, ctl)))
+						}
+						```
+					</script>
 				</section>
 				<!-- Slide end-->
 
