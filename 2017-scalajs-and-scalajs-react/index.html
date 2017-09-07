@@ -1,34 +1,34 @@
 <!doctype html>
 <html>
-	<head>
-		<meta charset="utf-8">
-		<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <head>
+        <meta charset="utf-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
 
-		<title>reveal.js</title>
+        <title>reveal.js</title>
 
-		<link rel="stylesheet" href="css/reveal.css">
-		<link rel="stylesheet" href="css/theme/custom.css">
+        <link rel="stylesheet" href="css/reveal.css">
+        <link rel="stylesheet" href="css/theme/custom.css">
 
-		<!-- Theme used for syntax highlighting of code -->
-		<link rel="stylesheet" href="lib/css/zenburn.css">
+        <!-- Theme used for syntax highlighting of code -->
+        <link rel="stylesheet" href="lib/css/zenburn.css">
 
-		<!-- Printing and PDF exports -->
-		<script>
-			var link = document.createElement( 'link' );
-			link.rel = 'stylesheet';
-			link.type = 'text/css';
-			link.href = window.location.search.match( /print-pdf/gi ) ? 'css/print/pdf.css' : 'css/print/paper.css';
-			document.getElementsByTagName( 'head' )[0].appendChild( link );
-		</script>
+        <!-- Printing and PDF exports -->
+        <script>
+            var link = document.createElement( 'link' );
+            link.rel = 'stylesheet';
+            link.type = 'text/css';
+            link.href = window.location.search.match( /print-pdf/gi ) ? 'css/print/pdf.css' : 'css/print/paper.css';
+            document.getElementsByTagName( 'head' )[0].appendChild( link );
+        </script>
         <style>
             .reveal pre code {
                 max-height: none;
             }
         </style>
-	</head>
-	<body>
-		<div class="reveal">
-			<div class="slides">
+    </head>
+    <body>
+        <div class="reveal">
+            <div class="slides">
                 <!-- Slide start -->
                 <section>
                     <h3>Building frontend applications with Scala.js and scalajs-react</h3>
@@ -38,7 +38,7 @@
                 </section>
                 <!-- Slide end -->
                 <!-- Slide Start -->
-				<section>
+                <section>
                     <h3>Andrii Malaman</h3>
                     <ul>
                         <li>Full-Stack Developer</li>
@@ -50,7 +50,7 @@
                 <!-- Slide end-->
 
                 <!-- Slide Start -->
-				<section>
+                <section>
                     <h3>JS Problems</h3>
                     <ul>
                         <li>Mutability</li>
@@ -112,14 +112,14 @@
                             <tr>
                                 <th>ES6/Flow</th>
                                 <th align="center">🚫</th>
-                                <th align="center">⚠️</th>
+                                <th align="center">✅</th>
                                 <th align="center">🚫</th>
                                 <th align="center">✅</th>
                             </tr>
                             <tr>
                                 <th>TypeScript</th>
                                 <th align="center">🚫</th>
-                                <th align="center">⚠️</th>
+                                <th align="center">✅</th>
                                 <th align="center">🚫</th>
                                 <th align="center">✅</th>
                             </tr>
@@ -211,31 +211,48 @@
                 </section>
                 <!-- Slide end-->
 
-				<!-- Slide Start -->
-				<section>
-					<h3>Ecosystem - Ported packages</h3>
-					<ul>
-						<li>
-							<a href="https://github.com/typelevel/cats">cats</a>, <a href="https://github.com/scalaz/scalaz">scalaz</a>, <a href="https://github.com/julien-truffaut/Monocle">Monocle</a> - functional programming
-						</li>
-						<li>
-							<a href="https://github.com/monix/monix">Monix</a> - reactive programming
-						</li>
-						<li>
-							<a href="https://github.com/circe/circe">circe</a> - JSON operations
-						</li>
-						<li>
-							<a href="https://github.com/adamw/macwire">MacWire</a> - Dependency Injection
-						</li>
-						<li>
-							<a href="https://github.com/akka-js/akka.js">akka.js</a>
-						</li>
-						<li>
-							<a href="http://www.scalatest.org/">ScalaTest</a>
-						</li>
-					</ul>
-				</section>
-				<!-- Slide end-->
+                <!-- Slide Start -->
+                <section>
+                    <h3>Ecosystem - Package types</h3>
+                    <ul>
+                        <li>
+                            Ported packages
+                        </li>
+                        <li>
+                            JS Facades
+                        </li>
+                        <li>
+                            Scala.js libraries
+                        </li>
+                    </ul>
+                </section>
+                <!-- Slide end-->
+
+                <!-- Slide Start -->
+                <section>
+                    <h3>Ecosystem - Ported packages</h3>
+                    <ul>
+                        <li>
+                            <a href="https://github.com/typelevel/cats">cats</a>, <a href="https://github.com/scalaz/scalaz">scalaz</a>, <a href="https://github.com/julien-truffaut/Monocle">Monocle</a> - functional programming
+                        </li>
+                        <li>
+                            <a href="https://github.com/monix/monix">Monix</a> - reactive programming
+                        </li>
+                        <li>
+                            <a href="https://github.com/circe/circe">circe</a> - JSON operations
+                        </li>
+                        <li>
+                            <a href="https://github.com/adamw/macwire">MacWire</a> - Dependency Injection
+                        </li>
+                        <li>
+                            <a href="https://github.com/akka-js/akka.js">akka.js</a>
+                        </li>
+                        <li>
+                            <a href="http://www.scalatest.org/">ScalaTest</a>
+                        </li>
+                    </ul>
+                </section>
+                <!-- Slide end-->
 
                 <!-- Slide Start -->
                 <section data-markdown>
@@ -246,19 +263,19 @@
                         import org.scalajs.dom
 
                         object ScalaJSExample extends js.JSApp {
+                          def getInnerHTML(counter: Int) =  s"<strong>Count: $counter</strong>"
                           def main(): Unit = {
                             val root = dom.document.getElementById("playground")
                             val paragraph = dom.document.createElement("p")
                             val btn = dom.document.createElement("button")
                               .asInstanceOf[dom.html.Button]
                             var counter: Int = 0
-
-                            paragraph.innerHTML = s"<strong>Count: $counter</strong>"
+                            paragraph.innerHTML = getInnerHTML(counter)
                             btn.innerHTML = "Click Me!"
 
                             btn.onclick = {e: dom.MouseEvent =>
                               counter += 1
-                              paragraph.innerHTML = s"<strong>Count: $counter</strong>"
+                              paragraph.innerHTML = getInnerHTML(counter)
                               js.Dynamic.global.console.log("counter: ", counter)
                             }
 
@@ -271,142 +288,140 @@
                 </section>
                 <!-- Slide end-->
 
-				<!-- Slide Start -->
-				<section>
-					<section data-markdown>
-						<script type="text/template">
-							## Interop
+                <!-- Slide Start -->
+                <section>
+                    <section data-markdown>
+                        <script type="text/template">
+                            ## Interop
 
-							```javascript
-							window.CustomJSON = {
-							  parse(value) {
-								try {
-								  return JSON.parse(value);
-								}
-								catch (e) {
-								  return;
-								}
-							  },
-							  stringify(value) {
-								  return JSON.stringify(value);
-							  }
-							}
-							```
-						</script>
-					</section>
-					<section data-markdown>
-						<script type="text/template">
-							```
-							import scala.scalajs.js
-							import scala.scalajs.js.annotation.JSGlobal
-							import js.Dynamic.{global => g}
+                            ```javascript
+                            window.CustomJSON = {
+                              parse(value) {
+                                try {
+                                  return JSON.parse(value);
+                                }
+                                catch (e) {
+                                  return;
+                                }
+                              },
+                              stringify(value) {
+                                  return JSON.stringify(value);
+                              }
+                            }
+                            ```
+                        </script>
+                    </section>
+                    <section data-markdown>
+                        <script type="text/template">
+                            ```
+                            import scala.scalajs.js
+                            import scala.scalajs.js.annotation.JSGlobal
+                            import js.Dynamic.{global => g}
 
-							object ScalaJSExample extends js.JSApp {
-							  @js.native
-							  @JSGlobal("CustomJSON")
-							  object CustomJSON extends js.Object {
-								def parse(x: String): js.UndefOr[js.Object]= js.native
-								def stringify(x: js.Dynamic): js.UndefOr[String]  = js.native
-							  }
+                            object ScalaJSExample extends js.JSApp {
+                              @js.native
+                              @JSGlobal("CustomJSON")
+                              object CustomJSON extends js.Object {
+                                def parse(x: String): js.UndefOr[js.Object]= js.native
+                                def stringify(x: js.Dynamic): js.UndefOr[String]  = js.native
+                              }
 
-							  def main(): Unit = {
-								val x = CustomJSON.parse("{\"a\": 1}")
-								if (x.isDefined) {
-								  g.console.log("x: ", x)
-								}
+                              def main(): Unit = {
+                                val x = CustomJSON.parse("{\"a\": 1}")
+                                    .getOrElse(js.Dynamic.literal())
+                                g.console.log("x: ", x)
+                                val toStringify = js.Dynamic
+                                  .literal("name" -> "John", "surname" -> "Doe")
+                                val y  = CustomJSON.stringify(toStringify)
+                                g.console.log("y: ", y)
+                              }
+                            }
+                            ```
+                        </script>
+                    </section>
+                </section>
+                <!-- Slide end-->
 
-								val toStringify = js.Dynamic
-								  .literal("name" -> "John", "surname" -> "Doe")
-								val y  = CustomJSON.stringify(toStringify)
-								g.console.log("y: ", y)
-							  }
-							}
-							```
-						</script>
-					</section>
-				</section>
-				<!-- Slide end-->
+                <!-- Slide Start -->
+                <section>
+                    <h3>Ecosystem - JS Facades</h3>
+                    <ul>
+                        <li>
+                            Facades are similar to TypeScript type definitions
+                        </li>
+                        <li>
+                            <a href="https://definitelyscala.com/">https://definitelyscala.com/</a> - repository of OSS facades
+                        </li>
+                        <li>
+                            ~700 facades are published on <a href="https://definitelyscala.com/">https://definitelyscala.com/</a>
+                        </li>
+                        <li>
+                            jquery, angularjs, angular2, react, vue facades are available
+                        </li>
+                    </ul>
+                </section>
+                <!-- Slide end-->
 
-				<!-- Slide Start -->
-				<section>
-					<h3>Ecosystem - JS Facades</h3>
-					<ul>
-						<li>
-							Facades are similar to TypeScript type definitions
-						</li>
-						<li>
-							<a href="https://definitelyscala.com/">https://definitelyscala.com/</a> - repository of OSS facades
-						</li>
-						<li>
-							~700 facades are published on <a href="https://definitelyscala.com/">https://definitelyscala.com/</a>
-						</li>
-						<li>
-							jquery, angularjs, angular2, react, vue facades are available
-						</li>
-					</ul>
-				</section>
-				<!-- Slide end-->
-
-				<!-- Slide Start -->
-				<section>
-					<h3>Ecosystem - Scala.js libraries</h3>
-					<ul>
-						<li>
-							<a href="http://www.lihaoyi.com/scalatags">scalatags</a>
-						</li>
-						<li>
-							<a href="https://github.com/japgolly/scalajs-react">scalajs-react</a>
-						</li>
-						<li>
-							<a href="http://udash.io/">Udash</a>
-						</li>
-						<li>
-							<a href="https://github.com/ThoughtWorksInc/Binding.scala">Binding.scala</a>
-						</li>
-						<li>
-							<a href="https://github.com/shadaj/slinky">Slinky</a>
-						</li>
-					</ul>
-				</section>
-				<!-- Slide end-->
+                <!-- Slide Start -->
+                <section>
+                    <h3>Ecosystem - Scala.js libraries</h3>
+                    <ul>
+                        <li>
+                            <a href="http://www.lihaoyi.com/scalatags">scalatags</a>
+                        </li>
+                        <li>
+                            <a href="https://github.com/japgolly/scalajs-react">scalajs-react</a>
+                        </li>
+                        <li>
+                            <a href="http://udash.io/">Udash</a>
+                        </li>
+                        <li>
+                            <a href="https://github.com/ThoughtWorksInc/Binding.scala">Binding.scala</a>
+                        </li>
+                        <li>
+                            <a href="https://github.com/shadaj/slinky">Slinky</a>
+                        </li>
+                    </ul>
+                </section>
+                <!-- Slide end-->
 
 
-				<!-- Slide Start -->
-				<section>
-					<img style="height:450px" src="img/scalajs_frameworks.png" />
-				</section>
-				<!-- Slide end-->
+                <!-- Slide Start -->
+                <section>
+                    <img style="height:450px" src="img/scalajs_frameworks.png" />
+                </section>
+                <!-- Slide end-->
 
-				<!-- Slide Start -->
-				<section>
-					<h3>Frontend App tools</h3>
-					<ul>
-						<li>
-							Rendering helper
-						</li>
-						<li>
-							UI events handler
-						</li>
-						<li>
-							Ajax/Websocket client
-						</li>
-						<li>
-							Data management helper
-						</li>
-						<li>
-							Router
-						</li>
-						<li>
-							Styling
-						</li>
-						<li>
-							Assets bundler
-						</li>
-					</ul>
-				</section>
-				<!-- Slide end-->
+                <!-- Slide Start -->
+                <section>
+                    <h3>Frontend App tools</h3>
+                    <ul>
+                        <li>
+                            Rendering helper
+                        </li>
+                        <li>
+                            UI events handler
+                        </li>
+                        <li>
+                            Ajax/Websocket client
+                        </li>
+                        <li>
+                            Data management helper
+                        </li>
+                        <li>
+                            Router
+                        </li>
+                        <li>
+                            Styling
+                        </li>
+                        <li>
+                            Assets bundler
+                        </li>
+                    </ul>
+                </section>
+                <!-- Slide end-->
 
-				<!-- Slide Start -->
+                <!-- Slide Start -->
                 <section>
                     <table>
                         <thead>
@@ -419,260 +434,260 @@
                             <tr>
                                 <th>Rendering helper</th>
                                 <th>
-									<a href="https://github.com/japgolly/scalajs-react">scalajs-react</a>
-								</th>
+                                    <a href="https://github.com/japgolly/scalajs-react">scalajs-react</a>
+                                </th>
                             </tr>
-							<tr>
+                            <tr>
                                 <th>UI events handler</th>
                                 <th>
-									<a href="https://github.com/japgolly/scalajs-react">scalajs-react</a>
-								</th>
+                                    <a href="https://github.com/japgolly/scalajs-react">scalajs-react</a>
+                                </th>
                             </tr>
-							<tr>
+                            <tr>
                                 <th>Ajax/Websocket client</th>
                                 <th>
-									<a href="https://github.com/scala-js/scala-js-dom">scala-js-dom</a>
-								</th>
+                                    <a href="https://github.com/scala-js/scala-js-dom">scala-js-dom</a>
+                                </th>
                             </tr>
-							<tr>
+                            <tr>
                                 <th>Data management helper</th>
                                 <th>
-									<a href="https://github.com/suzaku-io/diode">diode</a>
-								</th>
+                                    <a href="https://github.com/suzaku-io/diode">diode</a>
+                                </th>
                             </tr>
-							<tr>
-								<th>Router</th>
-								<th>
-									<a href="https://github.com/japgolly/scalajs-react">scalajs-react</a>
-								</th>
-							</tr>
-							<tr>
-								<th>Styling</th>
-								<th>
-									Inline-styles/SCSS
-								</th>
-							</tr>
-							<tr>
-								<th>Assets bundler</th>
-								<th>
-									<a href="https://github.com/webpack/webpack">webpack</a>
-								</th>
-							</tr>
+                            <tr>
+                                <th>Router</th>
+                                <th>
+                                    <a href="https://github.com/japgolly/scalajs-react">scalajs-react</a>
+                                </th>
+                            </tr>
+                            <tr>
+                                <th>Styling</th>
+                                <th>
+                                    Inline-styles/SCSS
+                                </th>
+                            </tr>
+                            <tr>
+                                <th>Assets bundler</th>
+                                <th>
+                                    <a href="https://github.com/webpack/webpack">webpack</a>
+                                </th>
+                            </tr>
 
                         </tbody>
                     </table>
                 </section>
                 <!-- Slide end-->
 
-				<!-- Slide Start -->
-				<section>
-					<h3>scalajs-react</h3>
-					<ul>
-						<li>
-							Type safe wrapper arround React.js library
-						</li>
-						<li>
-							Router as extra package
-						</li>
-						<li>
-							Integration with cats, scalaz, monocle
-						</li>
-						<li>
-							Test helpers
-						</li>
-					</ul>
-				</section>
-				<!-- Slide end-->
+                <!-- Slide Start -->
+                <section>
+                    <h3>scalajs-react</h3>
+                    <ul>
+                        <li>
+                            Type safe wrapper arround React.js library
+                        </li>
+                        <li>
+                            Router as extra package
+                        </li>
+                        <li>
+                            Integration with cats, scalaz, monocle
+                        </li>
+                        <li>
+                            Test helpers
+                        </li>
+                    </ul>
+                </section>
+                <!-- Slide end-->
 
-				<!-- Slide Start -->
-				<section data-markdown>
-					<script type="text/template">
-						```
-						import japgolly.scalajs.react._
-						import japgolly.scalajs.react.vdom.html_<^._
+                <!-- Slide Start -->
+                <section data-markdown>
+                    <script type="text/template">
+                        ```
+                        import japgolly.scalajs.react._
+                        import japgolly.scalajs.react.vdom.html_<^._
 
-						object Counter {
-						  case class State(count: Int)
+                        object Counter {
+                          case class State(count: Int)
 
-						  class Backend(bs: BackendScope[Unit, State]) {
+                          class Backend(bs: BackendScope[Unit, State]) {
 
-						    def handleClick(): Callback = bs
-							.modState(s => s.copy(count = s.count + 1))
+                            def handleClick(): Callback = bs
+                            .modState(s => s.copy(count = s.count + 1))
 
-						    def render(props: Unit, state: State): VdomElement =
-						      <.div(
-						        <.p(s"Count: ${state.count}"),
-						        <.button(^.onClick --> handleClick, "Click me")
-						      )
-						    }
+                            def render(props: Unit, state: State): VdomElement =
+                              <.div(
+                                <.p(s"Count: ${state.count}"),
+                                <.button(^.onClick --> handleClick, "Click me")
+                              )
+                            }
 
-						  val Component = ScalaComponent.builder[Unit]("Counter")
-						    .initialState(State(0))
-						    .renderBackend[Backend].build
-						}
-						```
-					</script>
-				</section>
-				<!-- Slide end-->
+                          val Component = ScalaComponent.builder[Unit]("Counter")
+                            .initialState(State(0))
+                            .renderBackend[Backend].build
+                        }
+                        ```
+                    </script>
+                </section>
+                <!-- Slide end-->
 
-				<!-- Slide Start -->
-				<section>
-					<h3>Callback class</h3>
-					<ul>
-						<li>
-							Encapsulates logic and side-effects
-						</li>
-						<li>
-							DOM, UI, IO actions should be wrapped with callback
-						</li>
-						<li>
-							Provides a set of utilities (.map, .log, .when/.unless)
-						</li>
-						<li>
-							 Allows composition with another callbacks (flatMap, >> operator)
-						</li>
-					</ul>
-				</section>
-				<!-- Slide end-->
-
-
-				<!-- Slide Start -->
-				<section data-markdown>
-					<script type="text/template">
-						```
-						object GoogleMaps {
-
-						  @JSImport("google-map-react", JSImport.Default)
-						  @js.native
-						  object JsComp extends js.Any
-
-						  @ScalaJSDefined
-						  trait Props extends js.Object {
-						    val bootstrapURLKeys: js.Object
-						    val center: js.Array[Double]
-						  }
-
-						  val Component = JsFnComponent[Props, None](JsComp)
-
-						  def props(lat: Double, lng: Double, zoom: Int): Props =
-						    new Props {
-						      val bootstrapURLKeys  = js.Dynamic.literal(key="secret")
-						      val center = js.Array(lat, lng)
-						    }
-
-						  def apply(lat: Double, lng: Double) = Component(props(lat, lng))()
-						}
-						```
-					</script>
-				</section>
-				<!-- Slide end-->
-
-				<!-- Slide Start -->
-				<section>
-					<h3>scalajs-react router</h3>
-					<ul>
-						<li>
-							Static, Dynamic routes
-						</li>
-						<li>
-							Nested routes
-						</li>
-						<li>
-							SPA Link component
-						</li>
-						<li>
-							 Conditional routes
-						</li>
-					</ul>
-				</section>
-				<!-- Slide end-->
+                <!-- Slide Start -->
+                <section>
+                    <h3>Callback class</h3>
+                    <ul>
+                        <li>
+                            Encapsulates logic and side-effects
+                        </li>
+                        <li>
+                            DOM, UI, IO actions should be wrapped with callback
+                        </li>
+                        <li>
+                            Provides a set of utilities (.map, .log, .when/.unless)
+                        </li>
+                        <li>
+                             Allows composition with another callbacks (flatMap, >> operator)
+                        </li>
+                    </ul>
+                </section>
+                <!-- Slide end-->
 
 
-				<!-- Slide Start -->
-				<section data-markdown>
-					<script type="text/template">
-						```
-						import japgolly.scalajs.react.extra.router._
+                <!-- Slide Start -->
+                <section data-markdown>
+                    <script type="text/template">
+                        ```
+                        object GoogleMaps {
 
-						object AppRouter {
-						  sealed trait Page
-						  case object HomeRoute extends Page
-						  case class SomeRoute(name: String, id: Int) extends Page
+                          @JSImport("google-map-react", JSImport.Default)
+                          @js.native
+                          object JsComp extends js.Any
 
-						  val routerConfig = RouterConfigDsl[Page].buildConfig { dsl =>
-						    import dsl._
-						    (trimSlashes
-						      | staticRoute(root, HomeRoute) ~> renderR(renderHomePage)
-						      | dynamicRouteCT(("some" / string(".*") / int)
-							  	.caseClass[SomeRoute]) ~> dynRenderR(renderSomePage)
-						    )
-						      .notFound(redirectToPage(HomeRoute)(Redirect.Replace))
-						  }
+                          @ScalaJSDefined
+                          trait Props extends js.Object {
+                            val bootstrapURLKeys: js.Object
+                            val center: js.Array[Double]
+                          }
 
-						  def renderHomePage(ctl: RouterCtl[Page]) =
-						    HomePage.Component(HomePage.Props(ctl)))
+                          val Component = JsFnComponent[Props, None](JsComp)
 
-						  def renderSomePage(p: SomeRoute, ctl: RouterCtl[Page]) =
-						    SomePage.Component(SomePage.Props(p.id, p.name, ctl)))
-						}
-						```
-					</script>
-				</section>
-				<!-- Slide end-->
+                          def props(lat: Double, lng: Double, zoom: Int): Props =
+                            new Props {
+                              val bootstrapURLKeys  = js.Dynamic.literal(key="secret")
+                              val center = js.Array(lat, lng)
+                            }
 
-				<!-- Slide Start -->
-				<section>
-					<section>
-						<h3>Problems</h3>
-						<ul>
-							<li>
-								Debugging is more difficult
-							</li>
-							<li>
-								Compile time on code change
-							</li>
-							<li>
-								High bus factor for ecosystem packages
-							</li>
-							<li>
-								Lack of documentation
-							</li>
-							<li>
-								Lack of marketing
-							</li>
-						</ul>
-					</section>
-					<section>
-						<img src="img/scalajs_youtube.png" />
-					</section>
-					<section>
-						<img src="img/scalajs_google.png" />
-					</section>
-				</section>
-				<!-- Slide end-->
+                          def apply(lat: Double, lng: Double) = Component(props(lat, lng))()
+                        }
+                        ```
+                    </script>
+                </section>
+                <!-- Slide end-->
 
-				<!-- Slide Start -->
-				<section>
-					<h3>When to use Scala.js</h3>
-					<ul>
-						<li>
-							Imported modules in your JS application
-						</li>
-						<li>
-							Team uses scala already
-						</li>
-						<li>
-							Algoritmic tasks in browser
-						</li>
-						<li>
-							Internal applications (control panels, dashboards)
-						</li>
-						<li>
-							? Public applications (with limited amount of third-party packages)
-						</li>
-					</ul>
-				</section>
-				<!-- Slide end-->
+                <!-- Slide Start -->
+                <section>
+                    <h3>scalajs-react router</h3>
+                    <ul>
+                        <li>
+                            Static, Dynamic routes
+                        </li>
+                        <li>
+                            Nested routes
+                        </li>
+                        <li>
+                            SPA Link component
+                        </li>
+                        <li>
+                             Conditional routes
+                        </li>
+                    </ul>
+                </section>
+                <!-- Slide end-->
+
+
+                <!-- Slide Start -->
+                <section data-markdown>
+                    <script type="text/template">
+                        ```
+                        import japgolly.scalajs.react.extra.router._
+
+                        object AppRouter {
+                          sealed trait Page
+                          case object HomeRoute extends Page
+                          case class SomeRoute(name: String, id: Int) extends Page
+
+                          val routerConfig = RouterConfigDsl[Page].buildConfig { dsl =>
+                            import dsl._
+                            (trimSlashes
+                              | staticRoute(root, HomeRoute) ~> renderR(renderHomePage)
+                              | dynamicRouteCT(("some" / string(".*") / int)
+                                .caseClass[SomeRoute]) ~> dynRenderR(renderSomePage)
+                            )
+                              .notFound(redirectToPage(HomeRoute)(Redirect.Replace))
+                          }
+
+                          def renderHomePage(ctl: RouterCtl[Page]) =
+                            HomePage.Component(HomePage.Props(ctl)))
+
+                          def renderSomePage(p: SomeRoute, ctl: RouterCtl[Page]) =
+                            SomePage.Component(SomePage.Props(p.id, p.name, ctl)))
+                        }
+                        ```
+                    </script>
+                </section>
+                <!-- Slide end-->
+
+                <!-- Slide Start -->
+                <section>
+                    <section>
+                        <h3>Problems</h3>
+                        <ul>
+                            <li>
+                                Debugging is more difficult
+                            </li>
+                            <li>
+                                Compile time on code change
+                            </li>
+                            <li>
+                                High bus factor for ecosystem packages
+                            </li>
+                            <li>
+                                Lack of documentation
+                            </li>
+                            <li>
+                                Lack of marketing
+                            </li>
+                        </ul>
+                    </section>
+                    <section>
+                        <img src="img/scalajs_youtube.png" />
+                    </section>
+                    <section>
+                        <img src="img/scalajs_google.png" />
+                    </section>
+                </section>
+                <!-- Slide end-->
+
+                <!-- Slide Start -->
+                <section>
+                    <h3>When to use Scala.js</h3>
+                    <ul>
+                        <li>
+                            Imported modules in your JS application
+                        </li>
+                        <li>
+                            Team uses scala already
+                        </li>
+                        <li>
+                            Algoritmic tasks in browser
+                        </li>
+                        <li>
+                            Internal applications (control panels, dashboards)
+                        </li>
+                        <li>
+                            ? Public applications (with limited amount of third-party packages)
+                        </li>
+                    </ul>
+                </section>
+                <!-- Slide end-->
 
 
                 <!-- Slide Start -->
@@ -683,24 +698,24 @@
                 <!-- Slide End -->
 
 
-		</div>
+        </div>
 
-		<script src="lib/js/head.min.js"></script>
-		<script src="js/reveal.js"></script>
+        <script src="lib/js/head.min.js"></script>
+        <script src="js/reveal.js"></script>
 
-		<script>
-			// More info https://github.com/hakimel/reveal.js#configuration
-			Reveal.initialize({
-				history: true,
+        <script>
+            // More info https://github.com/hakimel/reveal.js#configuration
+            Reveal.initialize({
+                history: true,
 
-				// More info https://github.com/hakimel/reveal.js#dependencies
-				dependencies: [
-					{ src: 'plugin/markdown/marked.js' },
-					{ src: 'plugin/markdown/markdown.js' },
-					{ src: 'plugin/notes/notes.js', async: true },
-					{ src: 'plugin/highlight/highlight.js', async: true, callback: function() { hljs.initHighlightingOnLoad(); } }
-				]
-			});
-		</script>
-	</body>
+                // More info https://github.com/hakimel/reveal.js#dependencies
+                dependencies: [
+                    { src: 'plugin/markdown/marked.js' },
+                    { src: 'plugin/markdown/markdown.js' },
+                    { src: 'plugin/notes/notes.js', async: true },
+                    { src: 'plugin/highlight/highlight.js', async: true, callback: function() { hljs.initHighlightingOnLoad(); } }
+                ]
+            });
+        </script>
+    </body>
 </html>
