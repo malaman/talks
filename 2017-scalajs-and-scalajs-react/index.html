@@ -67,7 +67,7 @@
                         ## JS Problems
 
                         ```javascript
-                        [1,5,42,2].map(parseInt);
+                        ['1','5','42','2'].map(parseInt);
                         > [1, NaN, NaN, 2]
 
                         var a = [1,5,42,2];
@@ -106,21 +106,21 @@
                                 <th>ES6</th>
                                 <th align="center">🚫</th>
                                 <th align="center">🚫</th>
-                                <th align="center">🚫</th>
+                                <th align="center">⚠️</th>
                                 <th align="center">✅</th>
                             </tr>
                             <tr>
                                 <th>ES6/Flow</th>
                                 <th align="center">🚫</th>
                                 <th align="center">✅</th>
-                                <th align="center">🚫</th>
+                                <th align="center">⚠️</th>
                                 <th align="center">✅</th>
                             </tr>
                             <tr>
                                 <th>TypeScript</th>
                                 <th align="center">🚫</th>
                                 <th align="center">✅</th>
-                                <th align="center">🚫</th>
+                                <th align="center">⚠️</th>
                                 <th align="center">✅</th>
                             </tr>
                             <tr>
@@ -212,6 +212,40 @@
                 <!-- Slide end-->
 
                 <!-- Slide Start -->
+                <section data-markdown>
+
+                    <script type="text/template">
+                        ```
+                        import scala.scalajs.js
+                        import org.scalajs.dom
+
+                        object ScalaJSExample extends js.JSApp {
+                          def getInnerHTML(counter: Int) =  s"<strong>Count: $counter</strong>"
+                          def main(): Unit = {
+                            val root = dom.document.getElementById("playground")
+                            val paragraph = dom.document.createElement("p")
+                            val btn = dom.document.createElement("button")
+                              .asInstanceOf[dom.html.Button]
+                            var counter: Int = 0
+                            paragraph.innerHTML = getInnerHTML(counter)
+                            btn.innerHTML = "Click Me!"
+
+                            btn.onclick = {e: dom.MouseEvent =>
+                              counter += 1
+                              paragraph.innerHTML = getInnerHTML(counter)
+                              js.Dynamic.global.console.log("counter: ", counter)
+                            }
+
+                            root.appendChild(paragraph)
+                            root.appendChild(btn)
+                          }
+                        }
+                        ```
+                    </script>
+                </section>
+                <!-- Slide end-->
+
+                <!-- Slide Start -->
                 <section>
                     <h3>Ecosystem - Package types</h3>
                     <ul>
@@ -255,40 +289,6 @@
                 <!-- Slide end-->
 
                 <!-- Slide Start -->
-                <section data-markdown>
-
-                    <script type="text/template">
-                        ```
-                        import scala.scalajs.js
-                        import org.scalajs.dom
-
-                        object ScalaJSExample extends js.JSApp {
-                          def getInnerHTML(counter: Int) =  s"<strong>Count: $counter</strong>"
-                          def main(): Unit = {
-                            val root = dom.document.getElementById("playground")
-                            val paragraph = dom.document.createElement("p")
-                            val btn = dom.document.createElement("button")
-                              .asInstanceOf[dom.html.Button]
-                            var counter: Int = 0
-                            paragraph.innerHTML = getInnerHTML(counter)
-                            btn.innerHTML = "Click Me!"
-
-                            btn.onclick = {e: dom.MouseEvent =>
-                              counter += 1
-                              paragraph.innerHTML = getInnerHTML(counter)
-                              js.Dynamic.global.console.log("counter: ", counter)
-                            }
-
-                            root.appendChild(paragraph)
-                            root.appendChild(btn)
-                          }
-                        }
-                        ```
-                    </script>
-                </section>
-                <!-- Slide end-->
-
-                <!-- Slide Start -->
                 <section>
                     <section data-markdown>
                         <script type="text/template">
@@ -323,7 +323,7 @@
                               @JSGlobal("CustomJSON")
                               object CustomJSON extends js.Object {
                                 def parse(x: String): js.UndefOr[js.Object]= js.native
-                                def stringify(x: js.Dynamic): js.UndefOr[String]  = js.native
+                                def stringify(x: js.Object): js.UndefOr[String]  = js.native
                               }
 
                               def main(): Unit = {
@@ -406,10 +406,10 @@
                             Ajax/Websocket client
                         </li>
                         <li>
-                            Data management helper
+                            Router
                         </li>
                         <li>
-                            Router
+                            Data management helper
                         </li>
                         <li>
                             Styling
@@ -511,7 +511,7 @@
 
                           class Backend(bs: BackendScope[Unit, State]) {
 
-                            def handleClick(): Callback = bs
+                            def handleClick: Callback = bs
                             .modState(s => s.copy(count = s.count + 1))
 
                             def render(props: Unit, state: State): VdomElement =
@@ -637,6 +637,29 @@
 
                 <!-- Slide Start -->
                 <section>
+                    <h3>Use cases</h3>
+                    <ul>
+                        <li>
+                            <a href="https://scastie.scala-lang.org" target="_blank">
+                                https://scastie.scala-lang.org
+                            </a>
+                        </li>
+                        <li>
+                            <a href="https://scalafiddle.io/ target="_blank">
+                                https://scalafiddle.io/
+                            </a>
+                        </li>
+                        <li>
+                            <a href="https://github.com/malaman/scala-weather-app target="_blank">
+                                https://github.com/malaman/scala-weather-app
+                            </a>
+                        </li>
+                    </ul>
+                </section>
+                <!-- Slide end-->
+
+                <!-- Slide Start -->
+                <section>
                     <section>
                         <h3>Problems</h3>
                         <ul>
@@ -671,19 +694,16 @@
                     <h3>When to use Scala.js</h3>
                     <ul>
                         <li>
-                            Imported modules in your JS application
-                        </li>
-                        <li>
-                            Team uses scala already
-                        </li>
-                        <li>
-                            Algoritmic tasks in browser
+                            Team already uses scala
                         </li>
                         <li>
                             Internal applications (control panels, dashboards)
                         </li>
                         <li>
-                            ? Public applications (with limited amount of third-party packages)
+                            Algoritmic tasks in browser
+                        </li>
+                        <li>
+                            ? Public applications (should be evaluated carefully)
                         </li>
                     </ul>
                 </section>
