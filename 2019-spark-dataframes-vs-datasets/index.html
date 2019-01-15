@@ -41,9 +41,9 @@
                 <section>
                     <h3>Apache Spark Provides </h3>
                     <ul>
-                        <li>Resilient Distributed Dataset (since Spark 1.x)</li>
-                        <li>DataFrames = Dataset[Row] (since Spark 2.x)</li>
-                        <li>Datasets (since Spark 2.x)</li>
+                        <li>Resilient Distributed Dataset (since Spark 0.x)</li>
+                        <li>DataFrames = Dataset[Row] (since Spark 1.3)</li>
+                        <li>Datasets (since Spark 1.6)</li>
                     </ul>
                 </section>
                 <!-- Slide end-->
@@ -74,6 +74,89 @@
                     </ul>
                 </section>
                 <!-- Slide end-->
+
+
+                <!-- Slide Start -->
+                <section>
+                    <h4>Dataset pros</h4>
+                    <ul>
+                        <li>Compile time type checks</li>
+                        <li>Easier to understand the code for scala developers</li>
+                        <li>Easier to test (because of case classes)</li>
+                    </ul>
+                    <hr/>
+                    <h4>Dataset cons</h4>
+                    <ul>
+                        <li>Limited operations in Dataset API</li>
+                        <li>More code</li>
+                    </ul>
+                </section>
+                <!-- Slide end-->
+
+                <!-- Slide Start -->
+                <section>
+                    <h4>Dataframe pros</h4>
+                    <ul>
+                        <li>Availability of Dataset API and SQL</li>
+                        <li>Code is very concise</li>
+                    </ul>
+                    <hr/>
+                    <h4>Dataset cons</h4>
+                    <ul>
+                        <li>No checks on compile time</li>
+                        <li>More difficult to maintain</li>
+                    </ul>
+                </section>
+                <!-- Slide end-->
+
+
+                <!-- Slide Start -->
+                <section>
+                    <h3>Dataset benefits</h3>
+                    <ul>
+                        <li>Compile time type checks</li>
+                        <li>Easier to understand the code for scala developers</li>
+                        <li>Easier to test (because of case classes)</li>
+                    </ul>
+                </section>
+                <!-- Slide end-->
+
+
+                <!-- Slide Start -->
+                <section>
+                    <h3>Dataframe benefits</h3>
+                    <ul>
+                        <li></li>
+                        <li>Easier to understand the code for scala developers</li>
+                        <li>Easier to test (because of case classes)</li>
+                    </ul>
+                </section>
+                <!-- Slide end-->
+
+
+
+
+                <!-- Slide Start -->
+                <section>
+                    <h3>Community opinion: Do not use UDF unless you must</h3>
+                    <ul>
+                        <li><a href="https://jaceklaskowski.gitbooks.io/mastering-spark-sql/spark-sql-udfs-blackbox.html">https://jaceklaskowski.gitbooks.io/mastering-spark-sql/spark-sql-udfs-blackbox.html</a></li>
+                        <li><a href="https://stackoverflow.com/questions/45491339/udfs-vs-spark-sql-vs-column-expressions-performance-optimization">https://stackoverflow.com/questions/45491339/udfs-vs-spark-sql-vs-column-expressions-performance-optimization</a></li>
+                    </ul>
+                </section>
+                <!-- Slide end-->
+
+
+                <!-- Slide Start -->
+                <section>
+                    <h3>Additional info</h3>
+                    <ul>
+                        <li><a href="https://techvidvan.com/tutorials/apache-spark-dataframe-vs-datasets/">https://techvidvan.com/tutorials/apache-spark-dataframe-vs-datasets/</a></li>
+                        <li><a href="https://jaceklaskowski.gitbooks.io/mastering-apache-spark">https://jaceklaskowski.gitbooks.io/mastering-apache-spark/</a></li>
+                    </ul>
+                </section>
+                <!-- Slide end-->
+
 
 
 
