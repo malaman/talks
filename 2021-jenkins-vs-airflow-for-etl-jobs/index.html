@@ -1,0 +1,294 @@
+<!doctype html>
+<html>
+    <head>
+        <meta charset="utf-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+
+        <title>reveal.js</title>
+
+        <link rel="stylesheet" href="css/reveal.css">
+        <link rel="stylesheet" href="css/theme/custom.css">
+
+        <!-- Theme used for syntax highlighting of code -->
+        <link rel="stylesheet" href="lib/css/zenburn.css">
+
+        <!-- Printing and PDF exports -->
+        <script>
+            var link = document.createElement( 'link' );
+            link.rel = 'stylesheet';
+            link.type = 'text/css';
+            link.href = window.location.search.match( /print-pdf/gi ) ? 'css/print/pdf.css' : 'css/print/paper.css';
+            document.getElementsByTagName( 'head' )[0].appendChild( link );
+        </script>
+        <style>
+            .reveal pre code {
+                max-height: none;
+            }
+        </style>
+    </head>
+    <body>
+        <div class="reveal">
+            <div class="slides">
+                <!-- Slide start -->
+                <section>
+                    <h3>Jenkins vs Apache Airflow for ETL Jobs</h3>
+                    <p>
+                        <small>Created by Andrii Malaman </small>
+                    </p>
+                </section>
+                <!-- Slide end -->
+
+                <!-- Slide Start -->
+                <section>
+                    <h3>Andrii Malaman</h3>
+                    <ul>
+                        <li>Software/Data Engineer</li>
+                        <li>Python, Scala, Golang, JS, Java</li>
+                        <li><a href="https://github.com/malaman" target="_blank">https://github.com/malaman</a>
+                    </ul>
+                </section>
+                <!-- Slide end-->
+
+                <!-- Slide Start -->
+                <section>
+                    <h3>What is ETL Pipeline?</h3>
+                    <section>
+                        <img src="img/etl_pipeline.png" />
+                    </section>
+                </section>
+                <!-- Slide end-->
+
+                <!-- Slide Start -->
+                <section>
+                    <h3>Questions to answer ?</h3>
+                    <ul>
+                        <li>Automatic start (schedule)</li>
+                        <li>Dependency between jobs</li>
+                        <li>Monitoring</li>
+                        <li>Restart after failure</li>
+                    </ul>
+                </section>
+                <!-- Slide end-->
+
+
+                <!-- Slide Start -->
+                <section>
+                    <h3>Historical solution: CRON!</h3>
+                    <section>
+                        <img src="img/cron_example.jpeg" />
+                    </section>
+                </section>
+                <!-- Slide end-->
+
+                <!-- Slide Start -->
+                <section>
+                    <h3>CRON</h3>
+                    <ul>
+                        <li>Automatic start (schedule) ✅</li>
+                        <li>Dependency between jobs 🚫</li>
+                        <li>Monitoring 🚫</li>
+                        <li>Restart after failure ⚠️</li>
+                    </ul>
+                </section>
+                <!-- Slide end-->
+
+
+                <!-- Slide Start -->
+                <section data-markdown>
+                    <script type="text/template">
+                        ## ETL Pipeline Management
+                        - [Luigi](https://github.com/spotify/luigi)
+                        - [Azkaban](https://github.com/azkaban/azkaban)
+                        - [Oozie](https://github.com/apache/oozie)
+                        - [Airflow](https://github.com/apache/airflow)
+                        - [NiFi](https://github.com/apache/nifi)
+                        - [Jenkins](https://github.com/jenkinsci/jenkins) ?
+                    </script>
+                </section>
+                <!-- Slide end-->
+
+                <!-- Slide Start -->
+                <section>
+                    <h3>Popularity (stackshare.io)</h3>
+                    <img src="img/stack_share_1.png" height="250px"/>
+                    <img src="img/stack_share_2.png" height="250px"/>
+                </section>
+                <!-- Slide end-->
+
+                <!-- Slide Start -->
+                <section>
+                    <h3>Comparison params</h3>
+                    <ul>
+                        <li>Easy to setup</li>
+                        <li>Easy to use</li>
+                        <li>Dependency between jobs</li>
+                        <li>Monitoring</li>
+                        <li>Restart after failure</li>
+                    </ul>
+                </section>
+                <!-- Slide end-->
+
+                <!-- Slide Start -->
+                <section>
+                    <h3>Easy to setup: Jenkins</h3>
+                    <img src="img/jenkins_setup.jpg"/>
+                </section>
+                <!-- Slide end-->
+
+                <!-- Slide Start -->
+                <section>
+                    <h3>Easy to setup: Airflow</h3>
+                    <img src="img/airflow_setup.png"/>
+                </section>
+                <!-- Slide end-->
+
+                <!-- Slide Start -->
+                <section data-markdown>
+                    <script type="text/template">
+                        ## Easy to use: Jenkins
+
+                        ```groovy
+                        pipeline {
+                            agent any
+                            stages {
+                                stage ('fetch data from db') {
+                                    ...
+                                }
+                                stage ('filter data') {
+                                    ...
+                                }
+                                stage ('upload data to server') {
+                                    ...
+                                }
+                                stage ('export data to excel') {
+                                    ...
+                                }
+                            }
+                        }
+                        ```
+                    </script>
+                </section>
+                <!-- Slide end-->
+
+                <!-- Slide Start -->
+                <section data-markdown>
+                    <script type="text/template">
+                        ## Easy to use: Airflow
+
+                        ```python
+                        from datetime import timedelta
+                        from airflow import DAG
+
+                        default_args = {
+                            'owner': 'airflow',
+                        }
+                        dag = DAG(
+                            'tutorial',
+                            default_args=default_args,
+                            description='A simple tutorial DAG',
+                            schedule_interval=timedelta(days=1),
+                            start_date=days_ago(2),
+                        )
+
+                        t1 = BashOperator(...)
+
+                        t2 = BashOperator(...)
+                        t3 = BashOperator(...)
+
+                        t1 >> [t2, t3]
+                        ```
+                    </script>
+                </section>
+                <!-- Slide end-->
+
+                <!-- Slide Start -->
+                <section>
+                    <h3>Dependency between jobs: Jenkins</h3>
+                    <img src="img/jenkins_pipeline.png" />
+                </section>
+                <!-- Slide end-->
+
+
+                <!-- Slide Start -->
+                <section>
+                    <h3>Dependency between jobs: Airflow</h3>
+                    <img src="img/airflow_pipeline.png" />
+                </section>
+                <!-- Slide end-->
+
+                <!-- Slide Start -->
+                <section>
+                    <table>
+                        <thead>
+                            <tr>
+                                <th>Tool</th>
+                                <th>Setup</th>
+                                <th>Usage</th>
+                                <th>Dependencies</th>
+                                <th>Mon.</th>
+                                <th>Recovery</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr class="fragment">
+                                <th>Jenkins</th>
+                                <th align="center">✅</th>
+                                <th align="center">✅</th>
+                                <th align="center">⚠️</th>
+                                <th align="center">✅</th>
+                                <th align="center">⚠️</th>
+                            </tr>
+                            <tr class="fragment">
+                                <th>Airflow</th>
+                                <th align="center">🚫</th>
+                                <th align="center">✅</th>
+                                <th align="center">✅</th>
+                                <th align="center">✅</th>
+                                <th align="center">✅</th>
+                            </tr>
+                        </tbody>
+                    </table>
+                </section>
+                <!-- Slide end-->
+
+                <!-- Slide Start -->
+                <section>
+                    <h3>Summary</h3>
+                    <ul>
+                        <li>Jenkins is good for small ETL Pipelines</li>
+                        <li>Airflow is good for complex ETL Pipelines</li>
+                        <li>Airflow has a number of build-in ETL operators</li>
+                    </ul>
+                </section>
+                <!-- Slide end-->
+
+
+                <!-- Slide Start -->
+                <section>
+                    <img src="img/questions.jpg" />
+                    <a href="https://malaman.github.io/talks/2017-scalajs-and-scalajs-react">https://malaman.github.io/talks/2017-scalajs-and-scalajs-react</a>
+                </section>
+                <!-- Slide End -->
+
+
+        </div>
+
+        <script src="lib/js/head.min.js"></script>
+        <script src="js/reveal.js"></script>
+
+        <script>
+            // More info https://github.com/hakimel/reveal.js#configuration
+            Reveal.initialize({
+                history: true,
+
+                // More info https://github.com/hakimel/reveal.js#dependencies
+                dependencies: [
+                    { src: 'plugin/markdown/marked.js' },
+                    { src: 'plugin/markdown/markdown.js' },
+                    { src: 'plugin/notes/notes.js', async: true },
+                    { src: 'plugin/highlight/highlight.js', async: true, callback: function() { hljs.initHighlightingOnLoad(); } }
+                ]
+            });
+        </script>
+    </body>
+</html>
