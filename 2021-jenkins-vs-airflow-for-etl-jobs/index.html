@@ -157,10 +157,10 @@
                                 stage ('filter data') {
                                     ...
                                 }
-                                stage ('upload data to server') {
+                                stage ('upload data to blob storage') {
                                     ...
                                 }
-                                stage ('export data to excel') {
+                                stage ('export data to an external system') {
                                     ...
                                 }
                             }
@@ -185,19 +185,26 @@
                         dag = DAG(
                             'tutorial',
                             default_args=default_args,
-                            description='A simple tutorial DAG',
+                            description='Complex Pipeline',
                             schedule_interval=timedelta(days=1),
                             start_date=days_ago(2),
                         )
 
                         t1 = BashOperator(...)
-
                         t2 = BashOperator(...)
                         t3 = BashOperator(...)
 
                         t1 >> [t2, t3]
                         ```
                     </script>
+                </section>
+                <!-- Slide end-->
+
+                <!-- Slide Start -->
+                <section>
+                    <h3>Airflow: Provider packages</h3>
+                    <img src="img/airflow_providers.png" height="350"/>
+                    <img src="img/airflow_providers2.png" height="350"/>
                 </section>
                 <!-- Slide end-->
 
